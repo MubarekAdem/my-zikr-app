@@ -29,7 +29,7 @@ export default function Surah() {
       <h1 className="text-2xl font-bold mt-4 text-center">سورة {id}</h1>
       <div className="mt-6 max-w-md text-right" dir="rtl">
         {ayahs.length > 0 ? (
-          <div className="leading-loose text-xl  space-y-2">
+          <div className="leading-loose text-xl space-y-2 text-justify">
             {ayahs.map((ayah) => (
               <span key={ayah.number}>
                 {ayah.text}{" "}
