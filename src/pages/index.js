@@ -25,6 +25,11 @@ export default function Home() {
             <h2 className="text-2xl font-semibold">quran</h2>
           </div>
         </Link>
+        <Link href="/Tasbeeh">
+          <div className="p-8 bg-white shadow-lg rounded-lg cursor-pointer hover:scale-105 transform transition">
+            <h2 className="text-2xl font-semibold">Tasbeeh</h2>
+          </div>
+        </Link>
       </div>
     </div>
   );
