@@ -1,60 +1,66 @@
 import { useState } from "react";
+import { FaFingerprint } from "react-icons/fa";
 
 export default function Tasbeeh() {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0); // Counter for tasbeeh clicks
+  const [textCounter, setTextCounter] = useState(0); // Counter to switch tasbeeh text after 33 counts
+  const [clickCount, setClickCount] = useState(0); // Click counter for display
 
-  // Function to handle swipes
-  const handleSwipe = (direction) => {
-    if (direction === "up") {
+  // Tasbeeh text array
+  const tasbeehTexts = ["سبحان الله", "الحمد لله", "الله أكبر"];
+
+  // Handle click event on the fingerprint button
+  const handleClick = () => {
+    if (counter < 32) {
       setCounter(counter + 1);
-    } else if (direction === "down" && counter > 0) {
-      setCounter(counter - 1);
-    }
-  };
-
-  // Simple swipe detection logic
-  const handleTouchStart = (e) => {
-    const touch = e.touches[0];
-    setSwipeStart(touch.clientY);
-  };
-
-  const handleTouchEnd = (e) => {
-    const touch = e.changedTouches[0];
-    const swipeEnd = touch.clientY;
-
-    // Detect swipe direction (up or down)
-    const swipeDistance = swipeStart - swipeEnd;
-    if (swipeDistance > 50) {
-      handleSwipe("up");
-    } else if (swipeDistance < -50) {
-      handleSwipe("down");
+      setClickCount(clickCount + 1); // Increment the click counter
+    } else {
+      setCounter(0); // Reset counter after 33 clicks
+      setClickCount(0); // Reset click counter
+      setTextCounter((prev) => (prev + 1) % tasbeehTexts.length); // Move to the next tasbeeh text
     }
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center bg-purple-100 p-4"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div className="min-h-screen flex flex-col items-center justify-center bg-purple-100 p-4 relative">
       {/* Tasbeeh Text */}
-      <div className="text-3xl font-bold mb-8">سبحان الله</div>
+      <div className="text-3xl font-bold mb-2">{tasbeehTexts[textCounter]}</div>
 
-      {/* Counter Display */}
-      <div className="flex flex-col items-center">
-        <div className="text-5xl font-semibold">{counter}</div>
+      {/* Click Counter */}
+      <div className="text-lg font-medium mb-6">Count: {clickCount}/33</div>
 
-        {/* Circle Indicators */}
-        <div className="flex flex-col items-center space-y-4 mt-8">
-          {[...Array(5)].map((_, i) => (
+      {/* Circle Indicators */}
+      <div className="relative flex flex-col items-center h-60 w-full overflow-hidden">
+        {[...Array(4)].map((_, i) => {
+          const index = (i + counter) % 4; // Loop through 4 circles
+          const yPosition = (index - 1.5) * 70; // Adjust for 4 circles
+
+          const sizeClass = index === 1 ? "w-16 h-16" : "w-12 h-12";
+          const colorClass = index === 1 ? "bg-purple-600" : "bg-purple-300";
+
+          return (
             <div
               key={i}
-              className={`w-12 h-12 rounded-full ${
-                i < counter ? "bg-purple-600" : "bg-purple-300"
-              }`}
+              className={`rounded-full ${sizeClass} ${colorClass} transition-all duration-300`}
+              style={{
+                transform: `translateY(${yPosition}px)`, // Smooth movement with a consistent offset
+                borderRadius: "50%", // Ensure the circles stay circular
+                position: "absolute", // Positioning absolutely to avoid distortion
+                top: "50%", // Start from the center vertically
+              }}
             />
-          ))}
-        </div>
+          );
+        })}
+      </div>
+
+      {/* Fingerprint Icon */}
+      <div className="fixed bottom-10">
+        <button
+          onClick={handleClick}
+          className="text-purple-700 text-6xl bg-white p-4 rounded-full shadow-lg"
+        >
+          <FaFingerprint />
+        </button>
       </div>
     </div>
   );
