@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function Surah() {
   const router = useRouter();
-  const { id } = router.query; // Surah number from the URL
+  const { id } = router.query; 
   const [ayahs, setAyahs] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Surah() {
           `https://api.alquran.cloud/v1/surah/${id}`
         );
         const data = await response.json();
-        setAyahs(data.data.ayahs); // Ayahs are inside data.data.ayahs
+        setAyahs(data.data.ayahs);
       }
       fetchAyahs();
     }
