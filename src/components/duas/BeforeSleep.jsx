@@ -29,6 +29,7 @@ const duas = [
 
 const DuasComponent = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const contentRefs = useRef([]);
 
   // Scroll to the selected dua
@@ -63,7 +64,11 @@ const DuasComponent = () => {
   return (
     <div className="flex h-screen">
       {/* Sidebar/Table of Contents */}
-      <div className="w-1/4 bg-gray-100 p-4 border-r overflow-y-auto">
+      <div
+        className={`${
+          isSidebarOpen ? "block" : "hidden"
+        } md:block w-full md:w-1/4 bg-gray-100 p-4 border-r overflow-y-auto`}
+      >
         <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
         <ul>
           {duas.map((dua, index) => (
@@ -82,8 +87,16 @@ const DuasComponent = () => {
         </ul>
       </div>
 
+      {/* Mobile Toggle Button */}
+      <button
+        className="md:hidden p-2 text-xl absolute top-4 left-4"
+        onClick={() => setSidebarOpen((prev) => !prev)}
+      >
+        {isSidebarOpen ? <FaChevronLeft /> : <FaChevronRight />}
+      </button>
+
       {/* Content Area */}
-      <div className="w-3/4 p-4 overflow-y-auto">
+      <div className="w-full md:w-3/4 p-4 overflow-y-auto ml-0 md:ml-1/4">
         {duas.map((dua, index) => (
           <motion.div
             key={index}

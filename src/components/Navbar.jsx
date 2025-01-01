@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaSun, FaMoon, FaHome, FaInfoCircle } from "react-icons/fa";
-
+//new
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   return (
     <nav className="bg-gray-800 dark:bg-gray-900 text-white p-4 fixed top-0 left-0 right-0 z-50">
