@@ -201,7 +201,7 @@ export default function MorningZikr() {
       className={`${robotoSlab.className} flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4 mt-[20px]`}
     >
       <Link
-        href="/"
+        href="/dua"
         className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
       >
         <FaArrowLeft className="mr-2" />

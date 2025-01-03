@@ -20,8 +20,8 @@ import {
 
 const duaCategories = [
   { href: "/dua/before-sleep", title: "Before Sleep Dhikr", icon: FaBed },
-  { href: "/salah", title: "Salah Dhikr", icon: FaPray },
-  { href: "/after-salah", title: "After Salah Dhikr", icon: FaPray },
+  { href: "/dua/salah", title: "Salah Dhikr", icon: FaPray },
+  { href: "/dua/after-salah", title: "After Salah Dhikr", icon: FaPray },
   { href: "/ruqyah", title: "Ruqyah & Illness", icon: FaShieldAlt },
   { href: "/praises", title: "Praises Of Allah", icon: FaHeart },
   { href: "/salawat", title: "Salawat", icon: FaMosque },
