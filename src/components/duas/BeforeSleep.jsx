@@ -198,7 +198,7 @@ export default function MorningZikr() {
 
   return (
     <div
-      className={`${robotoSlab.className} flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4`}
+      className={`${robotoSlab.className} flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4 mt-[20px]`}
     >
       <Link
         href="/"
