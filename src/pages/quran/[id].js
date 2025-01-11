@@ -11,7 +11,7 @@ const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 
 export default function Surah() {
   const params = useParams();
-  const { id } = params;
+  const id = params?.id; // Safely access `id`
 
   const [surah, setSurah] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,6 +39,9 @@ export default function Surah() {
         }
       }
       fetchSurah();
+    } else {
+      setLoading(false);
+      setError("Invalid Surah ID.");
     }
   }, [id]);
 
