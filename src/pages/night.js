@@ -112,7 +112,7 @@ const nightzikr = [
 
 export default function NightZikr() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentCount, setCurrentCount] = useState(nightzikZikr[0].count);
+  const [currentCount, setCurrentCount] = useState(nightZikr[0].count);
 
   const nextZikr = () => {
     if (currentCount > 1) {
