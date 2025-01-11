@@ -10,7 +10,7 @@ import { Roboto_Slab } from "next/font/google";
 const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 
 // Morning Zikr data (unchanged)
-const nightzikr = [
+const morningZikr = [
   {
     text: "أَعُوْذُ بِاللّٰهِ مِنَ الشَّيْطَانِ الرَّجِيْمِ. اَللّٰهُ لَآ إِلٰهَ إِلَّا هُوَ الْحَىُّ الْقَيُّوْمُ ، لَا تَأْخُذُهُۥ سِنَةٌ وَّلَا نَوْمٌ ، لَهُ مَا فِى السَّمٰـوٰتِ وَمَا فِى الْأَرْضِ ، مَنْ ذَا الَّذِىْ يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِۦ ، يَعْلَمُ مَا بَيْنَ أَيْدِيْهِمْ وَمَا خَلْفَهُمْ ، وَلَا يُحِيْطُوْنَ بِشَىْءٍ مِّنْ عِلْمِهِٓ إِلَّا بِمَا شَآءَ ، وَسِعَ كُرْسِيُّهُ السَّمٰـوٰتِ وَالْأَرْضَ، وَلَا يَئُوْدُهُۥ حِفْظُهُمَا ، وَهُوَ الْعَلِىُّ الْعَظِيْمُ",
 
@@ -110,36 +110,36 @@ const nightzikr = [
   // ... (keep the existing morningZikr array)
 ];
 
-export default function NightZikr() {
+export default function MorningZikr() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentCount, setCurrentCount] = useState(nightZikr[0].count);
+  const [currentCount, setCurrentCount] = useState(morningZikr[0].count);
 
   const nextZikr = () => {
     if (currentCount > 1) {
       setCurrentCount(currentCount - 1);
-    } else if (currentIndex < nightZikr.length - 1) {
+    } else if (currentIndex < morningZikr.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      setCurrentCount(nightZikr[currentIndex + 1].count);
+      setCurrentCount(morningZikr[currentIndex + 1].count);
     }
   };
 
   const prevZikr = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      setCurrentCount(nightZikr[currentIndex].count);
+      setCurrentCount(morningZikr[currentIndex].count);
     }
   };
 
   const progress =
-    ((nightZikr[currentIndex].count - currentCount + 1) /
-      nightZikr[currentIndex].count) *
+    ((morningZikr[currentIndex].count - currentCount + 1) /
+      morningZikr[currentIndex].count) *
     100;
 
   return (
     <div
       className={`${robotoSlab.className} flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4`}
     >
-      <h1 className="text-4xl font-bold mb-8 text-green-400">Night Zikr</h1>
+      <h1 className="text-4xl font-bold mb-8 text-green-400">Morning Zikr</h1>
       <div className="w-full max-w-2xl">
         <div className="flex justify-between items-center mb-6">
           <motion.button
@@ -147,7 +147,9 @@ export default function NightZikr() {
             whileTap={{ scale: 0.9 }}
             onClick={prevZikr}
             className="p-4 bg-green-600 rounded-full shadow-lg"
-            disabled={currentIndex === 0 && currentCount === nightZikr[0].count}
+            disabled={
+              currentIndex === 0 && currentCount === morningZikr[0].count
+            }
           >
             <FaChevronLeft className="text-2xl" />
           </motion.button>
@@ -180,7 +182,7 @@ export default function NightZikr() {
           className="p-8 bg-gray-800 rounded-lg shadow-2xl text-center"
         >
           <p className="text-2xl mb-4" dir="rtl">
-            {nightZikr[currentIndex].text}
+            {morningZikr[currentIndex].text}
           </p>
           <p className="text-sm text-gray-400">
             Repeat {currentCount} more {currentCount === 1 ? "time" : "times"}
