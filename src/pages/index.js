@@ -16,7 +16,7 @@ const menuItems = [
   },
   { href: "/night", title: "Night Zikr", subtitle: "የማታ ዚክር", icon: FaMoon },
   { href: "/dua", title: "Dua", subtitle: "ዱዓ", icon: FaPray },
-  { href: "/Quran", title: "Quran", subtitle: "", icon: FaBook },
+  { href: "/quran", title: "Quran", subtitle: "", icon: FaBook },
   { href: "/Tasbeeh", title: "Tasbeeh", subtitle: "", icon: FaLeaf },
 ];
 

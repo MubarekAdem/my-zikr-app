@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaBook, FaSpinner } from "react-icons/fa";
+import { FaBook, FaSpinner, FaSearch } from "react-icons/fa";
 import { Amiri } from "next/font/google";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
@@ -12,6 +12,9 @@ export default function Quran() {
   const [surahs, setSurahs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredSurahs, setFilteredSurahs] = useState([]);
+  const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
 
   useEffect(() => {
     async function fetchSurahs() {
@@ -22,6 +25,7 @@ export default function Quran() {
         }
         const data = await response.json();
         setSurahs(data.data);
+        setFilteredSurahs(data.data); // Initialize filteredSurahs
       } catch (err) {
         setError(
           "An error occurred while fetching the Surahs. Please try again later."
@@ -32,6 +36,25 @@ export default function Quran() {
     }
     fetchSurahs();
   }, []);
+
+  useEffect(() => {
+    // Filter Surahs based on search term
+    const filtered = surahs.filter(
+      (surah) =>
+        surah.englishName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        surah.name.includes(searchTerm)
+    );
+    setFilteredSurahs(filtered);
+
+    // Generate autocomplete suggestions
+    setAutocompleteSuggestions(
+      filtered.map((surah) => ({
+        number: surah.number,
+        englishName: surah.englishName,
+        name: surah.name,
+      }))
+    );
+  }, [searchTerm, surahs]);
 
   if (loading) {
     return (
@@ -59,8 +82,45 @@ export default function Quran() {
       >
         The Noble Quran
       </motion.h1>
+
+      {/* Search Bar */}
+      <div className="max-w-6xl mx-auto mb-6 relative">
+        <div className="flex items-center bg-white rounded-lg shadow-md p-4">
+          <FaSearch className="text-green-600 text-xl mr-3" />
+          <input
+            type="text"
+            placeholder="Search for a Surah..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full border-none focus:outline-none text-gray-700"
+          />
+        </div>
+        {searchTerm && (
+          <ul className="absolute bg-white border border-gray-200 rounded-lg mt-2 w-full z-10 max-h-40 overflow-y-auto shadow-md">
+            {autocompleteSuggestions.map((suggestion) => (
+              <li key={suggestion.number} className="p-2 hover:bg-gray-100">
+                <Link href={`/quran/${suggestion.number}`}>
+                  <div className="flex justify-between items-center">
+                    <span className="text-green-600 font-bold">
+                      {suggestion.number}
+                    </span>
+                    <span className="text-gray-700">
+                      {suggestion.englishName}
+                    </span>
+                    <span className={`${amiri.className} text-lg text-right`}>
+                      {suggestion.name}
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Surah List */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {surahs.map((surah, index) => (
+        {filteredSurahs.map((surah, index) => (
           <motion.div
             key={surah.number}
             initial={{ opacity: 0, scale: 0.9 }}
