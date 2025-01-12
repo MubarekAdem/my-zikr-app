@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Roboto_Slab } from "next/font/google";
 import Link from "next/link";
 import { FaSpinner, FaArrowLeft } from "react-icons/fa";
+
 const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 
 // Morning Zikr data (unchanged)
@@ -59,15 +60,15 @@ const morningZikr = [
     count: 1,
   }, // Alhamdulillah
   {
-    text: "أَصْبَحْتُ أُثْنِيْ عَلَيْكَ حَمْدًا ، وَأَشْهَدُ أَنْ لَّا إِلٰهَ إِلَّا اللّٰهُ.",
+    text: "أَمْسَيْتُ أُثْنِيْ عَلَيْكَ حَمْدًا ، وَأَشْهَدُ أَنْ لَّا إِلٰهَ إِلَّا اللّٰهُ.",
     count: 4,
   }, // Alhamdulillah
   {
-    text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلّٰهِ وَالْحَمْدُ لِلّٰهِ ، لَا إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيْكَ لَهُ ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيْرٌ ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِيْ هٰذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ ، وَأَعُوْذُ بِكَ مِنْ شَرِّ مَا فِيْ هٰذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ ، رَبِّ أَعُوْذُ بِكَ مِنَ الْكَسَلِ وَسُوْءِ الْكِبَرِ ، رَبِّ أَعُوْذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.",
+    text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلهِ وَالْحَمْدُ لِلهِ ، لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيْكَ لَهُ ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيْرٌ ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِيْ هٰذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا ، وَأَعُوْذُ بِكَ مِنْ شَرِّ مَا فِيْ هٰذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا ، رَبِّ أَعُوْذُ بِكَ مِنَ الْكَسَلِ وَسُوْءِ الْكِبَرِ ، رَبِّ أَعُوْذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْ",
     count: 3,
   }, // Alhamdulillah
   {
-    text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ ، اَللّٰهُمَّ إِنِّيْ أَسْأَلُكَ خَيْرَ هٰذَا الْيَوْمِ ، فَتْحَهُ وَنَصْرَهُ وَنُوْرَهُ وَبَرَكَتَهُ وَهُدَاهُ ، وَأَعُوْذُ بِكَ مِنْ شَرِّ مَا فِيْهِ وَشَرِّ مَا بَعْدَهُ.",
+    text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ للهِ رَبِّ الْعَالَمِيْنَ ، اَللّٰهُمَّ إِنِّيْ أَسْأَلُكَ خَيْرَ هـٰذِهِ اللَّيْلَةِ ، فَتْحَهَا وَنَصْرَهَا وَنُوْرَهـَا وَبَرَكَتَهَا وَهُدَاهـَا وَأَعُوْذُ بِكَ مِنْ شَرِّ مَا فِيْهَا وَشَرِّ مَا بَعْدَهَا",
     count: 1,
   }, // Alhamdulillah
   {
@@ -108,19 +109,12 @@ const morningZikr = [
     text: "الصلاة على النبي (اَللّٰهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَّعَلَىٰ اٰلِ مُحَمَّدٍ ، كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيْمَ وَعَلَىٰ اٰلِ إِبْرَاهِيْمَ ، إِنَّكَ حَمِيْدٌ مَّجِيْدٌ ، اَللّٰهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَّعَلَىٰ اٰلِ مُحَمَّدٍ ، كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيْمَ وَعَلَىٰ اٰلِ إِبْرَاهِيْمَ ، إِنَّكَ حَمِيْدٌ مَّجِيْدٌ).",
     count: 10,
   },
-  // ... (include all other zikr items here)
+  // ... (keep the existing morningZikr array)
 ];
 
 export default function MorningZikr() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentCount, setCurrentCount] = useState(morningZikr[0].count);
-  const [isCompleted, setIsCompleted] = useState(false);
-
-  useEffect(() => {
-    if (currentIndex === morningZikr.length - 1 && currentCount === 1) {
-      setIsCompleted(true);
-    }
-  }, [currentIndex, currentCount]);
 
   const nextZikr = () => {
     if (currentCount > 1) {
@@ -152,7 +146,7 @@ export default function MorningZikr() {
         className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
       >
         <FaArrowLeft className="mr-2" />
-        Back to Home
+        Back to Home.
       </Link>
       <h1 className="text-4xl font-bold mb-8 text-green-400">Morning Zikr</h1>
       <div className="w-full max-w-2xl">
@@ -184,32 +178,25 @@ export default function MorningZikr() {
             whileTap={{ scale: 0.9 }}
             onClick={nextZikr}
             className="p-4 bg-green-600 rounded-full shadow-lg"
-            disabled={isCompleted}
           >
             <FaChevronRight className="text-2xl" />
           </motion.button>
         </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="p-8 bg-gray-800 rounded-lg shadow-2xl text-center"
-          >
-            <p className="text-2xl mb-4" dir="rtl">
-              {morningZikr[currentIndex].text}
-            </p>
-            <p className="text-sm text-gray-400">
-              {isCompleted
-                ? "Completed."
-                : `Repeat ${currentCount} more ${
-                    currentCount === 1 ? "time" : "times"
-                  }`}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="p-8 bg-gray-800 rounded-lg shadow-2xl text-center"
+        >
+          <p className="text-2xl mb-4" dir="rtl">
+            {morningZikr[currentIndex].text}
+          </p>
+          <p className="text-sm text-gray-400">
+            Repeat {currentCount} more {currentCount === 1 ? "time" : "times"}
+          </p>
+        </motion.div>
       </div>
     </div>
   );

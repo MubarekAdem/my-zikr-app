@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { FaSpinner, FaArrowLeft } from "react-icons/fa";
 import { Amiri, Scheherazade_New } from "next/font/google";
 import Link from "next/link";
-import DecorativeFrame from "../../components/DecorativeFrame";
+import DecorativeFrame from "@/components/DecorativeFrame";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 const scheherazade = Scheherazade_New({
