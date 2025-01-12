@@ -203,7 +203,7 @@ export default function MorningZikr() {
             </p>
             <p className="text-sm text-gray-400">
               {isCompleted
-                ? "Completed"
+                ? "Completed."
                 : `Repeat ${currentCount} more ${
                     currentCount === 1 ? "time" : "times"
                   }`}

@@ -3,22 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaSun, FaMoon, FaHome, FaInfoCircle } from "react-icons/fa";
 
-const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const isDark = localStorage.getItem("darkMode") === "true";
-    setIsDarkMode(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
-  }, []);
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    localStorage.setItem("darkMode", newDarkMode);
-    document.documentElement.classList.toggle("dark", newDarkMode);
-  };
-
+const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   return (
     <nav className="bg-gray-800 dark:bg-gray-900 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">

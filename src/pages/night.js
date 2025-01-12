@@ -146,7 +146,7 @@ export default function MorningZikr() {
         className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
       >
         <FaArrowLeft className="mr-2" />
-        Back to Home
+        Back to Home.
       </Link>
       <h1 className="text-4xl font-bold mb-8 text-green-400">Morning Zikr</h1>
       <div className="w-full max-w-2xl">

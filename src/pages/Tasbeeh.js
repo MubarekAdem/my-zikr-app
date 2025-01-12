@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaFingerprint, FaHome, FaArrowLeft } from "react-icons/fa";
+import { FaFingerprint, FaArrowLeft } from "react-icons/fa";
 
 export default function Tasbeeh() {
   const [counter, setCounter] = useState(0); // Counter for tasbeeh clicks
@@ -31,7 +31,7 @@ export default function Tasbeeh() {
       <div className="flex justify-start mb-6">
         <Link
           href="/"
-          className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
+          className="inline-flex items-center text-green-600 hover:text-green-700"
         >
           <FaArrowLeft className="mr-2" />
           Back to Home
