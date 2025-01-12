@@ -1,5 +1,9 @@
+"use client";
+
 import { useState } from "react";
-import { FaFingerprint } from "react-icons/fa";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FaFingerprint, FaHome, FaArrowLeft } from "react-icons/fa";
 
 export default function Tasbeeh() {
   const [counter, setCounter] = useState(0); // Counter for tasbeeh clicks
@@ -22,12 +26,42 @@ export default function Tasbeeh() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-purple-100 p-4 relative">
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      {/* Back to Home */}
+      <div className="flex justify-start mb-6">
+        <Link
+          href="/"
+          className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
+        >
+          <FaArrowLeft className="mr-2" />
+          Back to Home
+        </Link>
+      </div>
+
+      {/* Tasbeeh Title */}
+      <motion.h1
+        className="text-4xl font-bold text-center text-green-600 mb-10"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Tasbeeh Counter
+      </motion.h1>
+
       {/* Tasbeeh Text */}
-      <div className="text-3xl font-bold mb-2">{tasbeehTexts[textCounter]}</div>
+      <motion.div
+        className="text-3xl font-bold text-center text-green-600 mb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {tasbeehTexts[textCounter]}
+      </motion.div>
 
       {/* Click Counter */}
-      <div className="text-lg font-medium mb-6">Count: {clickCount}/33</div>
+      <div className="text-lg font-medium text-center mb-6">
+        Count: {clickCount}/33
+      </div>
 
       {/* Circle Indicators */}
       <div className="relative flex flex-col items-center h-60 w-full overflow-hidden">
@@ -36,31 +70,33 @@ export default function Tasbeeh() {
           const yPosition = (index - 1.5) * 70; // Adjust for 4 circles
 
           const sizeClass = index === 1 ? "w-16 h-16" : "w-12 h-12";
-          const colorClass = index === 1 ? "bg-purple-600" : "bg-purple-300";
+          const colorClass = index === 1 ? "bg-green-600" : "bg-green-300";
 
           return (
-            <div
+            <motion.div
               key={i}
               className={`rounded-full ${sizeClass} ${colorClass} transition-all duration-300`}
               style={{
-                transform: `translateY(${yPosition}px)`, // Smooth movement with a consistent offset
-                borderRadius: "50%", // Ensure the circles stay circular
-                position: "absolute", // Positioning absolutely to avoid distortion
-                top: "50%", // Start from the center vertically
+                transform: `translateY(${yPosition}px)`,
               }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
             />
           );
         })}
       </div>
 
       {/* Fingerprint Icon */}
-      <div className="fixed bottom-10">
-        <button
+      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2">
+        <motion.button
           onClick={handleClick}
-          className="text-purple-700 text-6xl bg-white p-4 rounded-full shadow-lg"
+          className="text-green-700 text-6xl bg-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <FaFingerprint />
-        </button>
+        </motion.button>
       </div>
     </div>
   );

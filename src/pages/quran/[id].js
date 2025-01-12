@@ -4,14 +4,19 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaSpinner, FaArrowLeft } from "react-icons/fa";
-import { Amiri } from "next/font/google";
+import { Amiri, Scheherazade_New } from "next/font/google";
 import Link from "next/link";
+import DecorativeFrame from "../../components/DecorativeFrame";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
+const scheherazade = Scheherazade_New({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+});
 
 export default function Surah() {
   const params = useParams();
-  const id = params?.id; // Safely access `id`
+  const id = params?.id;
 
   const [surah, setSurah] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,7 +53,7 @@ export default function Surah() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <FaSpinner className="animate-spin text-4xl text-green-500" />
+        <FaSpinner className="animate-spin text-4xl text-green-600" />
       </div>
     );
   }
@@ -67,43 +72,56 @@ export default function Surah() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col items-center ${amiri.className} p-4 bg-gray-100`}
+      className={`min-h-screen flex flex-col items-center ${amiri.className} p-4 bg-[#f8f3e9]`}
     >
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-4xl">
         <Link
           href="/quran"
-          className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
+          className="inline-flex items-center text-green-700 hover:text-green-800 mb-4"
         >
           <FaArrowLeft className="mr-2" />
           Back to Surah List
         </Link>
         <motion.h1
-          className="text-3xl font-bold mt-4 text-center text-green-600 mb-6"
+          className="text-4xl font-bold mt-4 text-center text-green-700 mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           {surah.englishName} - {surah.name}
         </motion.h1>
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <DecorativeFrame>
           <p className="text-center text-gray-600 mb-4">
             {surah.englishNameTranslation} • {surah.numberOfAyahs} verses •{" "}
             {surah.revelationType}
           </p>
           <div className="mt-6" dir="rtl">
+            {surah.number !== 9 && (
+              <motion.div
+                className={`text-center mb-8 text-3xl ${scheherazade.className}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                ﷽
+              </motion.div>
+            )}
             {surah.ayahs.length > 0 ? (
-              <div className="leading-loose text-xl space-y-4 text-justify">
-                {surah.ayahs.map((ayah) => (
+              <div
+                className={`leading-loose text-2xl space-y-4 text-justify ${scheherazade.className}`}
+              >
+                {surah.ayahs.map((ayah, index) => (
                   <motion.div
                     key={ayah.number}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    className="relative group"
                   >
                     <span className="text-gray-800">{ayah.text}</span>{" "}
-                    <span className="text-green-500 text-sm">
-                      ({ayah.numberInSurah})
-                    </span>{" "}
+                    <span className="inline-flex items-center justify-center w-8 h-8 text-sm bg-green-100 text-green-700 rounded-full ml-2 transition-transform group-hover:scale-110">
+                      {ayah.numberInSurah}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -111,7 +129,7 @@ export default function Surah() {
               <p>No verses found.</p>
             )}
           </div>
-        </div>
+        </DecorativeFrame>
       </div>
     </div>
   );

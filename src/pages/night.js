@@ -6,6 +6,8 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Roboto_Slab } from "next/font/google";
+import Link from "next/link";
+import { FaSpinner, FaArrowLeft } from "react-icons/fa";
 
 const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 
@@ -139,6 +141,13 @@ export default function MorningZikr() {
     <div
       className={`${robotoSlab.className} flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4`}
     >
+      <Link
+        href="/"
+        className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
+      >
+        <FaArrowLeft className="mr-2" />
+        Back to Home
+      </Link>
       <h1 className="text-4xl font-bold mb-8 text-green-400">Morning Zikr</h1>
       <div className="w-full max-w-2xl">
         <div className="flex justify-between items-center mb-6">

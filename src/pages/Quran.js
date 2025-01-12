@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaBook, FaSpinner, FaSearch } from "react-icons/fa";
+import { FaBook, FaSpinner, FaSearch, FaArrowLeft } from "react-icons/fa";
 import { Amiri } from "next/font/google";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
@@ -74,6 +74,13 @@ export default function Quran() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <Link
+        href="/"
+        className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
+      >
+        <FaArrowLeft className="mr-2" />
+        Back to Home
+      </Link>
       <motion.h1
         className="text-4xl font-bold text-center text-green-600 mb-10"
         initial={{ opacity: 0, y: -50 }}
