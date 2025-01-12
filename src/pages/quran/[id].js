@@ -74,7 +74,7 @@ export default function Surah() {
     <div
       className={`min-h-screen flex flex-col items-center ${amiri.className} p-4 bg-[#f8f3e9]`}
     >
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/quran"
           className="inline-flex items-center text-green-700 hover:text-green-800 mb-4"
@@ -83,7 +83,7 @@ export default function Surah() {
           Back to Surah List
         </Link>
         <motion.h1
-          className="text-4xl font-bold mt-4 text-center text-green-700 mb-6"
+          className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-4 text-center text-green-700 mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -95,7 +95,7 @@ export default function Surah() {
             {surah.englishNameTranslation} • {surah.numberOfAyahs} verses •{" "}
             {surah.revelationType}
           </p>
-          <div className="mt-6" dir="rtl">
+          <div className="mt-6 px-2 sm:px-4 lg:px-6" dir="rtl">
             {surah.number !== 9 && (
               <motion.div
                 className={`text-center mb-8 text-3xl ${scheherazade.className}`}
@@ -108,7 +108,7 @@ export default function Surah() {
             )}
             {surah.ayahs.length > 0 ? (
               <div
-                className={`leading-loose text-2xl space-y-4 text-justify ${scheherazade.className}`}
+                className={`leading-relaxed text-lg sm:text-xl space-y-4 text-justify ${scheherazade.className}`}
               >
                 {surah.ayahs.map((ayah, index) => (
                   <motion.div
