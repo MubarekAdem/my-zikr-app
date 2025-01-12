@@ -1,11 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaSun, FaMoon, FaPray, FaBook, FaLeaf } from "react-icons/fa";
-import { Roboto_Slab } from "next/font/google";
-
-const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 
 const menuItems = [
   {
@@ -22,11 +17,9 @@ const menuItems = [
 
 export default function Home() {
   return (
-    <div
-      className={`${robotoSlab.className} flex flex-col items-center justify-center min-h-screen text-center bg-gradient-to-br from-gray-900 to-gray-800 text-white`}
-    >
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] text-center">
       <motion.h1
-        className="text-5xl font-bold mb-10 text-green-400"
+        className="text-5xl font-bold mb-10 text-green-600 dark:text-green-400"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -43,14 +36,16 @@ export default function Home() {
           >
             <Link href={item.href} className="block">
               <motion.div
-                className="p-8 bg-gray-800 shadow-lg rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300 flex flex-col items-center"
+                className="p-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300 flex flex-col items-center"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <item.icon className="text-4xl mb-4 text-green-400" />
+                <item.icon className="text-4xl mb-4 text-green-600 dark:text-green-400" />
                 <h2 className="text-2xl font-semibold">{item.title}</h2>
                 {item.subtitle && (
-                  <p className="text-sm text-gray-400 mt-2">{item.subtitle}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    {item.subtitle}
+                  </p>
                 )}
               </motion.div>
             </Link>
