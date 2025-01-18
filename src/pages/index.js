@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaSun, FaMoon, FaPray, FaBook, FaLeaf } from "react-icons/fa";
+import {
+  FaSun,
+  FaMoon,
+  FaPray,
+  FaBook,
+  FaLeaf,
+  FaQuoteRight,
+} from "react-icons/fa";
 
 const menuItems = [
   {
@@ -11,21 +18,14 @@ const menuItems = [
   },
   { href: "/night", title: "Night Zikr", subtitle: "የማታ ዚክር", icon: FaMoon },
   { href: "/dua", title: "Dua", subtitle: "ዱዓ", icon: FaPray },
-  { href: "/quran", title: "Quran", subtitle: "", icon: FaBook },
-  { href: "/tasbeeh", title: "Tasbeeh", subtitle: "", icon: FaLeaf },
+  { href: "/quran", title: "Quran", subtitle: "ቁርአንአን", icon: FaBook },
+  { href: "/tasbeeh", title: "Tasbeeh", subtitle: "ተስቢህ", icon: FaLeaf },
+  { href: "/hadith", title: "Hadith", subtitle: "ሐዲስ", icon: FaQuoteRight }, // New menu item for Hadith
 ];
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] text-center">
-      {/* <motion.h1
-        className="text-5xl font-bold mb-10 text-green-600 dark:text-green-400"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Zikr App
-      </motion.h1> */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full px-4">
         {menuItems.map((item, index) => (
           <motion.div
