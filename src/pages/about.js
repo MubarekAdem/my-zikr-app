@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-6 text-green-600 dark:text-green-400">
+      <h1 className="text-4xl font-bold mb-6 text-green-600 dark:text-green-400 mt-12">
         About Zikr App
       </h1>
       <p className="text-lg mb-4">

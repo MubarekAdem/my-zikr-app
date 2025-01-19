@@ -19,7 +19,7 @@ export default function Hadith() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <Link href="/hadith/sahih-bukhari" className="block">
+          <Link href="/hadith/bukhari" className="block">
             <motion.div
               className="p-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300 flex flex-col items-center"
               whileHover={{ scale: 1.05 }}

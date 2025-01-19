@@ -26,7 +26,7 @@ export default function Tasbeeh() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen bg-gray-100 py-10 px-4 ">
       {/* Back to Home */}
       <div className="flex justify-start mb-6">
         <Link

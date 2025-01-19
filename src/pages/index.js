@@ -20,7 +20,12 @@ const menuItems = [
   { href: "/dua", title: "Dua", subtitle: "ዱዓ", icon: FaPray },
   { href: "/quran", title: "Quran", subtitle: "ቁርአንአን", icon: FaBook },
   { href: "/tasbeeh", title: "Tasbeeh", subtitle: "ተስቢህ", icon: FaLeaf },
-  { href: "/hadith", title: "Hadith", subtitle: "ሐዲስ", icon: FaQuoteRight }, // New menu item for Hadith
+  {
+    href: "/hadith/bukhari",
+    title: "Hadith",
+    subtitle: "ሐዲስ",
+    icon: FaQuoteRight,
+  }, // New menu item for Hadith
 ];
 
 export default function Home() {
