@@ -9,6 +9,8 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
           rel="stylesheet"
         />
+        <meta name="google" content="notranslate" />
+        <meta httpEquiv="Content-Language" content="en" />
       </Head>
       <body>
         <Main />
